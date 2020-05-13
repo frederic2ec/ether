@@ -1,0 +1,6 @@
+{
+    "python.pythonPath": "/home/coder/projects/ether/venv/bin/python3.6",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "editor.formatOnSave": true
+}
