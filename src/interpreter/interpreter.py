@@ -66,6 +66,10 @@ class Number:
         if isinstance(other, Number):
             return Number(self.value ** other.value).set_context(self.context), None
 
+    def moded_by(self, other):
+        if isinstance(other, Number):
+            return Number(self.value % other.value).set_context(self.context), None
+
     def __repr__(self):
         return str(self.value)
 
@@ -116,6 +120,8 @@ class Interpreter:
             result, error = left.dived_by(right)
         elif node.op_tok.type == TT_POW:
             result, error = left.powed_by(right)
+        elif node.op_tok.type == TT_MOD:
+            result, error = left.moded_by(right)
 
         if error:
             return res.failure(error)

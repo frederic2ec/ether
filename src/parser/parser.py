@@ -72,15 +72,13 @@ class Parser:
                     self.current_tok.pos_start, self.current_tok.pos_end,
                     "Expected ')'"
                 ))
-
-        print("mo")
         return res.failure(InvalidSyntaxError(
             tok.pos_start, tok.pos_end,
             "Expected int, float, '+', '-' or '('"
         ))
 
     def power(self):
-        return self.bin_op(self.atom, (TT_POW, ), self.factor)
+        return self.bin_op(self.atom, (TT_POW, TT_MOD), self.factor)
 
     def factor(self):
         res = ParseResult()
