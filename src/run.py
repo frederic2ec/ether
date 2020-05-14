@@ -18,7 +18,7 @@ def run(fn, text):
     parser = Parser(tokens)
     ast = parser.parse()
     if ast.error:
-        return None, error
+        return None, ast.error
 
     # Run program
     interpreter = Interpreter()

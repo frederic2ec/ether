@@ -62,6 +62,10 @@ class Number:
                 return None, RTError(other.pos_start, other.pos_end, 'Division by zero', self.context)
             return Number(self.value / other.value).set_context(self.context), None
 
+    def powed_by(self, other):
+        if isinstance(other, Number):
+            return Number(self.value ** other.value).set_context(self.context), None
+
     def __repr__(self):
         return str(self.value)
 
@@ -110,6 +114,8 @@ class Interpreter:
             result, error = left.multed_by(right)
         elif node.op_tok.type == TT_DIV:
             result, error = left.dived_by(right)
+        elif node.op_tok.type == TT_POW:
+            result, error = left.powed_by(right)
 
         if error:
             return res.failure(error)
