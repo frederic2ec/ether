@@ -9,7 +9,6 @@ LETTERS = string.ascii_letters
 LETTERS_DIGITS = LETTERS + DIGITS
 
 KEYWORDS = [
-    '$'
 ]
 
 ########
@@ -27,9 +26,19 @@ TT_DIV = 'DIV'
 TT_POW = 'POW'
 TT_MOD = 'MOD'
 TT_EQ = 'EQ'
+TT_EE = 'EE'
+TT_NE = 'NE'
+TT_LT = 'LT'
+TT_GT = 'GT'
+TT_LTE = 'LTE'
+TT_GTE = 'LTE'
+TT_AND = 'AND'
+TT_OR = 'OR'
+TT_NOT = 'NOT'
 TT_LPAREN = 'LPAREN'
 TT_RPAREN = 'RPAREN'
 TT_EOF = 'EOF'
+TT_DOLLAR = 'DOLLAR'
 
 
 class Token:

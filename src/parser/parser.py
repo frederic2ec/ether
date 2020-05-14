@@ -51,7 +51,7 @@ class Parser:
     def parse(self):
         res = self.expr()
         if not res.error and self.current_tok.type != TT_EOF:
-            return res.failure(InvalidSyntaxError(self.current_tok.pos_start, self.current_tok.pos_end, "Expected '+', '-', '*' or '/'"))
+            return res.failure(InvalidSyntaxError(self.current_tok.pos_start, self.current_tok.pos_end, "Expected '+', '-', '*', '/', '^', '%', '==', '!=', '<', '>', <=', '>=', '&' or '|'"))
         return res
 
     def atom(self):
@@ -108,9 +108,30 @@ class Parser:
     def term(self):
         return self.bin_op(self.factor, (TT_MUL, TT_DIV))
 
+    def arith(self):
+        return self.bin_op(self.term, (TT_PLUS, TT_MINUS))
+
+    def comp(self):
+        res = ParseResult()
+        if self.current_tok.type == TT_NOT:
+            op_tok = self.current_tok
+            res.register_advancement()
+            self.advance()
+
+            node = res.register(self.comp())
+            if res.error:
+                return res
+            return res.success(UnaryOpNode(op_tok, node))
+        node = res.register(self.bin_op(
+            self.arith, (TT_EE, TT_NE, TT_LT, TT_GT, TT_LTE, TT_GTE)))
+        if res.error:
+            return res.failure(InvalidSyntaxError(self.current_tok.pos, self.current_tok.pos_end, "Expected int, float, identifier, '+', '-', '(', '!'"))
+
+        return res.success(node)
+
     def expr(self):
         res = ParseResult()
-        if self.current_tok.matches(TT_KEYWORD, '$'):
+        if self.current_tok.type == TT_DOLLAR:
             res.register_advancement()
             self.advance()
 
@@ -129,7 +150,7 @@ class Parser:
                 return res
             return res.success(VarAssignNode(var_name, expr))
 
-        node = res.register(self.bin_op(self.term, (TT_PLUS, TT_MINUS)))
+        node = res.register(self.bin_op(self.comp, (TT_OR, TT_AND, TT_NOT)))
 
         if res.error:
             return res.failure(InvalidSyntaxError(self.current_tok.pos_start, self.current_tok.pos_end, "Expected '$', int, float, identifier, '+', '-' or '('"))
@@ -145,7 +166,7 @@ class Parser:
         if res.error:
             return res
 
-        while self.current_tok.type in ops:
+        while self.current_tok.type in ops or (self.current_tok.type, self.current_tok.value) in ops:
             op_tok = self.current_tok
             res.register_advancement()
             self.advance()
