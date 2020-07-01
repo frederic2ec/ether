@@ -14,21 +14,33 @@ func TestNextToken(t *testing.T) {
 		x + y
 	<-
 	
-	$result = add(five, ten)`
+	$result = add(five, ten)
+	!-/*5
+	5 < 10 > 5
+	
+	if (5 < 10) ->
+		echo true
+	<- else ->
+		echo false
+	<-
+
+	10 == 10
+	10 != 9
+	`
 
 	tests := []struct {
 		expectedType    token.TokenType
 		expectedLiteral string
 	}{
-		{token.LET, "$"},
+		{token.VAR, "$"},
 		{token.IDENT, "five"},
 		{token.ASSIGN, "="},
 		{token.INT, "5"},
-		{token.LET, "$"},
+		{token.VAR, "$"},
 		{token.IDENT, "ten"},
 		{token.ASSIGN, "="},
 		{token.INT, "10"},
-		{token.LET, "$"},
+		{token.VAR, "$"},
 		{token.IDENT, "add"},
 		{token.ASSIGN, "="},
 		{token.FUNCTION, "fn"},
@@ -37,14 +49,12 @@ func TestNextToken(t *testing.T) {
 		{token.COMMA, ","},
 		{token.IDENT, "y"},
 		{token.RPAREN, ")"},
-		{token.MINUS, "-"},
-		{token.GT, ">"},
+		{token.RARROW, "->"},
 		{token.IDENT, "x"},
 		{token.PLUS, "+"},
 		{token.IDENT, "y"},
-		{token.LT, "<"},
-		{token.MINUS, "-"},
-		{token.LET, "$"},
+		{token.LARROW, "<-"},
+		{token.VAR, "$"},
 		{token.IDENT, "result"},
 		{token.ASSIGN, "="},
 		{token.IDENT, "add"},
@@ -53,6 +63,37 @@ func TestNextToken(t *testing.T) {
 		{token.COMMA, ","},
 		{token.IDENT, "ten"},
 		{token.RPAREN, ")"},
+		{token.BANG, "!"},
+		{token.MINUS, "-"},
+		{token.SLASH, "/"},
+		{token.ASTERIK, "*"},
+		{token.INT, "5"},
+		{token.INT, "5"},
+		{token.LT, "<"},
+		{token.INT, "10"},
+		{token.GT, ">"},
+		{token.INT, "5"},
+		{token.IF, "if"},
+		{token.LPAREN, "("},
+		{token.INT, "5"},
+		{token.LT, "<"},
+		{token.INT, "10"},
+		{token.RPAREN, ")"},
+		{token.RARROW, "->"},
+		{token.ECHO, "echo"},
+		{token.TRUE, "true"},
+		{token.LARROW, "<-"},
+		{token.ELSE, "else"},
+		{token.RARROW, "->"},
+		{token.ECHO, "echo"},
+		{token.FALSE, "false"},
+		{token.LARROW, "<-"},
+		{token.INT, "10"},
+		{token.EQ, "=="},
+		{token.INT, "10"},
+		{token.INT, "10"},
+		{token.NOT_EQ, "!="},
+		{token.INT, "9"},
 		{token.EOF, ""},
 	}
 
