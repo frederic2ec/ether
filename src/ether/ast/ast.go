@@ -34,7 +34,7 @@ type VarStatement struct {
 	value Expression
 }
 
-func (ls *VarStatement) StatementNode()       {}
+func (ls *VarStatement) statementNode()       {}
 func (ls *VarStatement) TokenLiteral() string { return ls.Token.Literal }
 
 type Identifier struct {
@@ -44,3 +44,11 @@ type Identifier struct {
 
 func (i *Identifier) expressionNode()      {}
 func (i *Identifier) TokenLiteral() string { return i.Token.Literal }
+
+type EchoStatement struct {
+	Token       token.Token // the 'echo' token
+	ReturnValue Expression
+}
+
+func (es *EchoStatement) statementNode()       {}
+func (es *EchoStatement) TokenLiteral() string { return es.Token.Literal }
