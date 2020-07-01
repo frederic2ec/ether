@@ -9,7 +9,7 @@ const (
 	// Identifiers + literals
 	IDENT = "IDENT"
 	INT   = "INT"
-	VAR   = "$"
+	VAR   = "VAR"
 
 	// Operators
 	ASSIGN  = "="
