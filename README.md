@@ -1,7 +1,7 @@
 # Ether
-* A modern lightweight programming language written entirely in Python 3
+* A modern lightweight programming language written entirely in Python 3 🐍🐍
 
-## Specifications of the language
+## Documentation
 
 ## Grammar
 
@@ -26,6 +26,7 @@ atom   : INT|FLOAT|IDENTIFIER
 ```
 
 ## Math
+
 * Arithmetic
 
 ```
