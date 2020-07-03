@@ -106,6 +106,33 @@ func TestIfElseExpression(t *testing.T) {
 	}
 }
 
+func TestEchoStatements(t *testing.T) {
+	tests := []struct {
+		input    string
+		expected int64
+	}{
+		{"echo 10;", 10},
+		{"echo 10; 9;", 10},
+		{"echo 2 * 5; 9;", 10},
+		{"9; echo 2 * 5; 9;", 10},
+		{
+			`
+			if (10 > 1) ->
+			if (10 > 1) ->
+			echo 10;
+			<-
+			echo 1;
+			<-
+			`,
+			10,
+		},
+	}
+	for _, tt := range tests {
+		evaluated := testEval(tt.input)
+		testIntegerObject(t, evaluated, tt.expected)
+	}
+}
+
 func testBooleanObject(t *testing.T, obj object.Object, expected bool) bool {
 	result, ok := obj.(*object.Boolean)
 	if !ok {
