@@ -9,6 +9,7 @@ const (
 	BOOLEAN_OBJ    = "BOOLEAN"
 	NULL_OBJ       = "NULL"
 	ECHO_VALUE_OBJ = "ECHO_VALUE"
+	ERROR_OBJ      = "ERROR"
 )
 
 type Object interface {
@@ -41,3 +42,10 @@ type EchoValue struct {
 
 func (ev *EchoValue) Type() ObjectType { return ECHO_VALUE_OBJ }
 func (ev *EchoValue) Inspect() string  { return ev.Value.Inspect() }
+
+type Error struct {
+	Message string
+}
+
+func (e *Error) Type() ObjectType { return ERROR_OBJ }
+func (e *Error) Inspect() string  { return "ERROR: " + e.Message }
