@@ -29,6 +29,9 @@ const (
 	LARROW = "<-"
 	RARROW = "->"
 
+	LDOLLAR = "<$"
+	RDOLLAR = "$>"
+
 	// Delimiters
 	COMMA     = ","
 	SEMICOLON = ";"
