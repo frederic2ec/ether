@@ -60,6 +60,11 @@ func (l *Lexer) NextToken() token.Token {
 			l.readChar()
 			literal := string(ch) + string(l.ch)
 			tok = token.Token{Type: token.LARROW, Literal: literal}
+		} else if l.peekChar() == '$' {
+			ch := l.ch
+			l.readChar()
+			literal := string(ch) + string(l.ch)
+			tok = token.Token{Type: token.LDOLLAR, Literal: literal}
 		} else {
 			tok = newToken(token.LT, l.ch)
 		}
@@ -78,7 +83,14 @@ func (l *Lexer) NextToken() token.Token {
 	case '}':
 		tok = newToken(token.RBRACE, l.ch)
 	case '$':
-		tok = newToken(token.VAR, l.ch)
+		if l.peekChar() == '>' {
+			ch := l.ch
+			l.readChar()
+			literal := string(ch) + string(l.ch)
+			tok = token.Token{Type: token.RDOLLAR, Literal: literal}
+		} else {
+			tok = newToken(token.VAR, l.ch)
+		}
 	case '"':
 		tok.Type = token.STRING
 		tok.Literal = l.readString()

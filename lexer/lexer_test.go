@@ -10,19 +10,20 @@ func TestNextToken(t *testing.T) {
 	input := `$five = 5
 	$ten = 10
 	
-	$add = fn(x, y) ->
+	$add = fn(x, y) <$
 		x + y
-	<-
+	$>
+
 	
 	$result = add(five, ten)
 	!-/*5
 	5 < 10 > 5
 	
-	if (5 < 10) ->
+	if (5 < 10) <$
 		echo true
-	<- else ->
+	$> else <$
 		echo false
-	<-
+	$>
 
 	10 == 10
 	10 != 9
@@ -53,11 +54,11 @@ func TestNextToken(t *testing.T) {
 		{token.COMMA, ","},
 		{token.IDENT, "y"},
 		{token.RPAREN, ")"},
-		{token.RARROW, "->"},
+		{token.LDOLLAR, "<$"},
 		{token.IDENT, "x"},
 		{token.PLUS, "+"},
 		{token.IDENT, "y"},
-		{token.LARROW, "<-"},
+		{token.RDOLLAR, "$>"},
 		{token.VAR, "$"},
 		{token.IDENT, "result"},
 		{token.ASSIGN, "="},
@@ -83,15 +84,15 @@ func TestNextToken(t *testing.T) {
 		{token.LT, "<"},
 		{token.INT, "10"},
 		{token.RPAREN, ")"},
-		{token.RARROW, "->"},
+		{token.LDOLLAR, "<$"},
 		{token.ECHO, "echo"},
 		{token.TRUE, "true"},
-		{token.LARROW, "<-"},
+		{token.RDOLLAR, "$>"},
 		{token.ELSE, "else"},
-		{token.RARROW, "->"},
+		{token.LDOLLAR, "<$"},
 		{token.ECHO, "echo"},
 		{token.FALSE, "false"},
-		{token.LARROW, "<-"},
+		{token.RDOLLAR, "$>"},
 		{token.INT, "10"},
 		{token.EQ, "=="},
 		{token.INT, "10"},

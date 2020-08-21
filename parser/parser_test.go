@@ -391,7 +391,7 @@ func TestBooleanExpression(t *testing.T) {
 }
 
 func TestIfExpression(t *testing.T) {
-	input := `if (x < y) -> x <-`
+	input := `if (x < y) <$ x $>`
 
 	l := lexer.New(input)
 	p := New(l)
@@ -440,7 +440,7 @@ func TestIfExpression(t *testing.T) {
 }
 
 func TestIfElseExpression(t *testing.T) {
-	input := `if (x < y) -> x <- else -> y <-`
+	input := `if (x < y) <$ x $> else <$ y $>`
 
 	l := lexer.New(input)
 	p := New(l)
@@ -499,7 +499,7 @@ func TestIfElseExpression(t *testing.T) {
 }
 
 func TestFunctionLiteralParsing(t *testing.T) {
-	input := `fn(x,y) -> x + y <-`
+	input := `fn(x,y) <$ x + y $>`
 
 	l := lexer.New(input)
 	p := New(l)
@@ -544,9 +544,9 @@ func TestFunctionParameterParsing(t *testing.T) {
 		input          string
 		expectedParams []string
 	}{
-		{input: "fn() -><-", expectedParams: []string{}},
-		{input: "fn(x) -><-", expectedParams: []string{"x"}},
-		{input: "fn(x,y,z) -><-", expectedParams: []string{"x", "y", "z"}},
+		{input: "fn() <$$>", expectedParams: []string{}},
+		{input: "fn(x) <$$>", expectedParams: []string{"x"}},
+		{input: "fn(x,y,z) <$$>", expectedParams: []string{"x", "y", "z"}},
 	}
 
 	for _, tt := range tests {
