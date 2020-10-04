@@ -266,7 +266,7 @@ func (p *Parser) parseIfExpression() ast.Expression {
 		return nil
 	}
 
-	if !p.expectPeek(token.LDOLLAR) {
+	if !p.expectPeek(token.COLON) {
 		return nil
 	}
 
@@ -275,7 +275,7 @@ func (p *Parser) parseIfExpression() ast.Expression {
 	if p.peekTokenIs(token.ELSE) {
 		p.nextToken()
 
-		if !p.expectPeek(token.LDOLLAR) {
+		if !p.expectPeek(token.COLON) {
 			return nil
 		}
 		expression.Alternative = p.parseBlockStatement()
@@ -290,7 +290,7 @@ func (p *Parser) parseBlockStatement() *ast.BlockStatement {
 
 	p.nextToken()
 
-	for !p.curTokenIs(token.RDOLLAR) && !p.curTokenIs(token.EOF) {
+	for !p.curTokenIs(token.RBRACE) && !p.curTokenIs(token.EOF) {
 		stmt := p.parseStatement()
 		if stmt != nil {
 			block.Statements = append(block.Statements, stmt)
@@ -309,7 +309,7 @@ func (p *Parser) parseFunctionLiteral() ast.Expression {
 
 	lit.Parameters = p.parseFunctionParameters()
 
-	if !p.expectPeek(token.LDOLLAR) {
+	if !p.expectPeek(token.COLON) {
 		return nil
 	}
 

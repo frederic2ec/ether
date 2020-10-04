@@ -86,13 +86,13 @@ func TestIfElseExpression(t *testing.T) {
 		input    string
 		expected interface{}
 	}{
-		{"if (true) <$ 10 $>", 10},
-		{"if (false) <$ 10 $>", nil},
-		{"if (1) <$ 10 $>", 10},
-		{"if (1 < 2) <$ 10 $>", 10},
-		{"if (1 > 2) <$ 10 $>", nil},
-		{"if (1 > 2) <$ 10 $> else <$ 20 $>", 20},
-		{"if (1 < 2) <$ 10 $> else <$ 20 $>", 10},
+		{"if (true) : 10 }", 10},
+		{"if (false) : 10 }", nil},
+		{"if (1) : 10 }", 10},
+		{"if (1 < 2) : 10 }", 10},
+		{"if (1 > 2) : 10 }", nil},
+		{"if (1 > 2) : 10 } else : 20 }", 20},
+		{"if (1 < 2) : 10 } else : 20 }", 10},
 	}
 
 	for _, tt := range tests {
@@ -117,12 +117,12 @@ func TestEchoStatements(t *testing.T) {
 		{"9; echo 2 * 5; 9;", 10},
 		{
 			`
-			if (10 > 1) <$
-			if (10 > 1) <$
+			if (10 > 1) :
+			if (10 > 1) :
 			echo 10;
-			$>
+			}
 			echo 1;
-			$>
+			}
 			`,
 			10,
 		},
@@ -159,13 +159,13 @@ func TestErrorHandling(t *testing.T) {
 			"unknown operator: BOOLEAN + BOOLEAN",
 		},
 		{
-			"if (10 > 1) <$ true + false; $>",
+			"if (10 > 1) : true + false; }",
 			"unknown operator: BOOLEAN + BOOLEAN",
 		},
 		{
 			`
-	if (10 > 1) <$
-	if (10 > 1) <$
+	if (10 > 1) :
+	if (10 > 1) :
 	echo true + false;
 	}
 	echo 1;
@@ -182,7 +182,7 @@ func TestErrorHandling(t *testing.T) {
 			"unknown operator: STRING - STRING",
 		},
 		{
-			`{"name": "Bob"}[fn(x) <$ x $>];`,
+			`{"name": "Bob"}[fn(x) : x }];`,
 			"unusable as hash key: FUNCTION",
 		},
 	}
@@ -251,7 +251,7 @@ func TestVarStatements(t *testing.T) {
 }
 
 func TestFunctionObject(t *testing.T) {
-	input := "fn(x) <$ x + 2; $>"
+	input := "fn(x) : x + 2; }"
 	evaluated := testEval(input)
 	fn, ok := evaluated.(*object.Function)
 	if !ok {
@@ -275,12 +275,12 @@ func TestFunctionApplication(t *testing.T) {
 		input    string
 		expected int64
 	}{
-		{"$identity = fn(x) <$ x; $> identity(5);", 5},
-		{"$identity = fn(x) <$ echo x; $> identity(5);", 5},
-		{"$double = fn(x) <$ x * 2; $> double(5);", 10},
-		{"$add = fn(x, y) <$ x + y; $> add(5, 5);", 10},
-		{"$add = fn(x, y) <$ x + y; $> add(5 + 5, add(5, 5));", 20},
-		{"fn(x) <$ x; $>(5)", 5},
+		{"$identity = fn(x) : x; } identity(5);", 5},
+		{"$identity = fn(x) : echo x; } identity(5);", 5},
+		{"$double = fn(x) : x * 2; } double(5);", 10},
+		{"$add = fn(x, y) : x + y; } add(5, 5);", 10},
+		{"$add = fn(x, y) : x + y; } add(5 + 5, add(5, 5));", 20},
+		{"fn(x) : x; }(5)", 5},
 	}
 	for _, tt := range tests {
 		testIntegerObject(t, testEval(tt.input), tt.expected)
@@ -312,9 +312,9 @@ func TestStringConcatenation(t *testing.T) {
 }
 func TestClosures(t *testing.T) {
 	input := `
-	$newAdder = fn(x) <$
-	fn(y) <$ x + y $>
-	$>
+	$newAdder = fn(x) :
+	fn(y) : x + y }
+	}
 	$addTwo = newAdder(2);
 	addTwo(2);`
 	testIntegerObject(t, testEval(input), 4)
