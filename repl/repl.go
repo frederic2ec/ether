@@ -2,15 +2,16 @@ package repl
 
 import (
 	"bufio"
-	"ether/evaluator"
-	"ether/lexer"
-	"ether/object"
-	"ether/parser"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
 	"os"
+
+	"github.com/frederic2ec/ether/evaluator"
+	"github.com/frederic2ec/ether/lexer"
+	"github.com/frederic2ec/ether/object"
+	"github.com/frederic2ec/ether/parser"
 )
 
 const PROMPT = "#=> "

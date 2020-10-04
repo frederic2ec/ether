@@ -1,9 +1,10 @@
 package evaluator
 
 import (
-	"ether/ast"
-	"ether/object"
 	"fmt"
+
+	"github.com/frederic2ec/ether/ast"
+	"github.com/frederic2ec/ether/object"
 )
 
 var (

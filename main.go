@@ -1,13 +1,14 @@
 package main
 
 import (
-	"ether/repl"
 	"flag"
 	"fmt"
 	"log"
 	"os"
 	"os/user"
 	"path"
+
+	"github.com/frederic2ec/ether/repl"
 )
 
 var (

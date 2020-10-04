@@ -1,10 +1,11 @@
 package evaluator
 
 import (
-	"ether/lexer"
-	"ether/object"
-	"ether/parser"
 	"testing"
+
+	"github.com/frederic2ec/ether/lexer"
+	"github.com/frederic2ec/ether/object"
+	"github.com/frederic2ec/ether/parser"
 )
 
 func TestEvalIntegerExpression(t *testing.T) {

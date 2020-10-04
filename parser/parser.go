@@ -1,9 +1,9 @@
 package parser
 
 import (
-	"ether/ast"
-	"ether/lexer"
-	"ether/token"
+	"github.com/frederic2ec/ether/ast"
+	"github.com/frederic2ec/ether/lexer"
+	"github.com/frederic2ec/ether/token"
 
 	"fmt"
 	"strconv"

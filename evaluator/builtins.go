@@ -1,8 +1,9 @@
 package evaluator
 
 import (
-	"ether/object"
 	"fmt"
+
+	"github.com/frederic2ec/ether/object"
 )
 
 var builtins = map[string]*object.Builtin{

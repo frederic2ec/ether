@@ -2,10 +2,11 @@ package object
 
 import (
 	"bytes"
-	"ether/ast"
 	"fmt"
 	"hash/fnv"
 	"strings"
+
+	"github.com/frederic2ec/ether/ast"
 )
 
 type ObjectType string

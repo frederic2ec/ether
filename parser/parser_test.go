@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"ether/ast"
-	"ether/lexer"
+	"github.com/frederic2ec/ether/ast"
+	"github.com/frederic2ec/ether/lexer"
 )
 
 func TestVarStatements(t *testing.T) {

@@ -2,8 +2,9 @@ package ast
 
 import (
 	"bytes"
-	"ether/token"
 	"strings"
+
+	"github.com/frederic2ec/ether/token"
 )
 
 type Node interface {
