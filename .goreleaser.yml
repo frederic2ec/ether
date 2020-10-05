@@ -68,5 +68,3 @@ changelog:
       - "^tests?:"
       - '^\w+\s+' # a hack to remove commit messages without colons thus don't correspond to a packag
 
-env:
-  HOMBRE_TAP: ${{ secrets.HOMEBREW_TAP_GITHUB_TOKEN }}

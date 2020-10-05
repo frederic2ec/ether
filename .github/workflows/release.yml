@@ -60,6 +60,7 @@ jobs:
           version: latest
           args: release --rm-dist
         env:
+          HOMBRE_TAP: ${{ secrets.HOMEBREW_TAP_GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG: ${{ steps.vars.outputs.version_tag }}
 
