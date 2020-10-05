@@ -52,7 +52,7 @@ brews:
   - tap:
       owner: frederic2ec
       name: homebrew-ether
-      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+      token: "{{ .Env.HOMBRE_TAP }}"
     folder: Formula
     homepage: https://github.com/frederic2ec/ether
     description: A modern lightweight programming language written in GO.
@@ -67,3 +67,6 @@ changelog:
       - "^readme:"
       - "^tests?:"
       - '^\w+\s+' # a hack to remove commit messages without colons thus don't correspond to a packag
+
+env:
+  HOMBRE_TAP: ${{ secrets.HOMEBREW_TAP_GITHUB_TOKEN }}
