@@ -52,6 +52,7 @@ brews:
   - tap:
       owner: frederic2ec
       name: homebrew-ether
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
     folder: Formula
     homepage: https://github.com/frederic2ec/ether
     description: A modern lightweight programming language written in GO.
