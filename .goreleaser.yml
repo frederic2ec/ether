@@ -47,6 +47,14 @@ release:
     name: ether
   draft: true
   prerelease: auto
+
+  brews:
+    - github:
+        owner: frederic2ec
+        name: homebrew-ether
+      folder: Formula
+      homepage: https://github.com/frederic2ec/ether
+      description: A modern lightweight programming language written in GO.
 changelog:
   sort: asc
   filters:
