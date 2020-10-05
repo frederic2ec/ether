@@ -49,7 +49,7 @@ release:
   prerelease: auto
 
 brews:
-  - github:
+  - tap:
       owner: frederic2ec
       name: homebrew-ether
     folder: Formula
