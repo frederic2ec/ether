@@ -70,7 +70,7 @@ jobs:
           GEMFURY_PUSH_TOKEN: ${{ secrets.GEMFURY_PUSH_TOKEN }}
         run: |
           for filename in dist/*.deb; do
-            curl -F package=@"$filename" https://${GEMFURY_PUSH_TOKEN}:@push.fury.io/meerkat/
+            curl -F package=@"$filename" https://${GEMFURY_PUSH_TOKEN}:@push.fury.io/ether/
           done
       # Only publish on non-special tags (e.g. non-beta)
       - name: Publish .rpm to Gemfury
@@ -79,5 +79,5 @@ jobs:
           GEMFURY_PUSH_TOKEN: ${{ secrets.GEMFURY_PUSH_TOKEN }}
         run: |
           for filename in dist/*.rpm; do
-            curl -F package=@"$filename" https://${GEMFURY_PUSH_TOKEN}:@push.fury.io/meerkat/
+            curl -F package=@"$filename" https://${GEMFURY_PUSH_TOKEN}:@push.fury.io/ether/
           done
